@@ -19,17 +19,86 @@ p{
 }
 h1{
     font-weight: 300;
-    font-size: 50px;
-    line-height: 50px;
+    font-size: 22px;
+    line-height: 22px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
 }
-h1 span{
-    font-size: 30px;
-    line-height: 30px;
+h1 > span{
+    font-size: 18px;
+    line-height: 18px;
+    display: block;
 }
 h1 strong{
-    display: block;
     font-weight: 900;
+    position: relative;
+    color: #003366;
 }
+h1 strong span{
+    position: relative;
+    z-index: 5;
+}
+h1 strong:after{
+    content: '';
+    background: #06fe99;
+    display: block;
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    top: 30%;
+    left: 5px;
+    z-index: 1;
+}
+@media (min-width: 576px){
+    h1{
+        font-size: 32px;
+        line-height: 32px;
+    }
+    h1 > span{
+        font-size: 25px;
+        line-height: 25px;
+    }
+    h1 strong:after{
+        height: 25px;
+        left: 10px;
+    }
+
+}
+@media (min-width: 768px){
+    h1{
+        font-size: 42px;
+        line-height: 42px;
+    }
+    h1 > span{
+        font-size: 30px;
+        line-height: 30px;
+    }
+    h1 strong:after{
+        height: 30px;
+        left: 10px;
+    }
+
+}
+@media (min-width: 992px){
+    h1{
+        font-size: 50px;
+        line-height: 50px;
+    }
+    h1 > span{
+        font-size: 30px;
+        line-height: 30px;
+    }
+    h1 strong:after{
+        height: 40px;
+        left: 10px;
+    }
+
+}
+
+
+
+
 h2:not(.accordion-header){
     font-weight: 800;
     color: #f6f;
@@ -179,25 +248,27 @@ h3{
 
 /*HEADER*/
 header{
+    margin-top: 80px;
     height: 450px;
     display: flex;
     align-items: center;
-    background: #F1F1E6;
+    background: #F1F1E6 url(bg-header.jpeg);
+    background-position: center bottom;
+    background-size: cover;
     position: relative;
 }
 
 /*DIRECTORES*/
 .director{
     background: #035;
-    -moz-transform: skew(0deg, -10deg);
-    -webkit-transform: skew(0deg, -10deg);
-    -o-transform: skew(0deg, -10deg);
-    -ms-transform: skew(0deg, -10deg);
-    transform: skew(0deg, -10deg);
     padding: 10px 10px 10px 60px;
     border-radius: 5px;
     position: relative;
     color: #fff;
+    margin-bottom: 30px;
+    transform: skew(0deg, -10deg) translatey(0px);
+    -webkit-animation: float 6s ease-in-out infinite;
+            animation: float 6s ease-in-out infinite;
 }
 .director .foto-director{
     position: absolute;
@@ -219,7 +290,31 @@ header{
     margin-bottom: 0;
 }
 .director-item-2{
+    left: 50px;
     top: 50px;
+    animation-delay: 1s;
+}
+@media (min-width: 992px){
+    .director-item-2{
+        left: 0;
+        top: 50px;
+    }
+}
+.director .shadow{
+    width: 100%;
+    height: 1px;
+    display: block;
+    background: rgba(0,0,0,.1);
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 2px rgba(0,0,0,.6) !important;
+    -webkit-animation: inverse-float 6s ease-in-out infinite;
+            animation: inverse-float 6s ease-in-out infinite;
+}
+.director.director-item-2 .shadow{
+    animation-delay: 1s;
 }
 /*PROGRAMA*/
 .programa{
@@ -263,7 +358,12 @@ header{
     width: 40px;
 }
 .mod-content{
-    padding: 30px;
+    padding: 30px 15px 30px 5px;
+}
+@media (min-width: 992px){
+    .mod-content{
+        padding: 30px;
+    }
 }
 .mod-content h3{
     display: inline-block;
@@ -306,17 +406,27 @@ header{
     -o-transform: skew(0deg, -10deg);
     -ms-transform: skew(0deg, -10deg);
     transform: skew(0deg, -10deg);
-    z-index: 10;
+    z-index: 7;
     position: relative;
     top: -10px;
 }
 
 .docente-content{
-    padding: 20px 30px 20px 100px;
+    padding: 20px 15px 20px 65px;
     position: relative;
     left: -50px;
     background: #035;
     color: #fff;
+}
+@media (min-width: 992px){
+    .docente-content{
+        padding: 20px 30px 20px 70px;
+    }
+}
+@media (min-width: 1200px){
+    .docente-content{
+        padding: 20px 30px 20px 100px;
+    }
 }
 .docente-content h3{
     font-weight: 800;
@@ -333,12 +443,34 @@ header{
     bottom: -10px;
     right: 40px;
 }
-
-.docentes-container > div:nth-child(2n){
-    top: 50px;
-    position: relative;
+.docentes-container > div{
+    animation: fadeInLeft 1s ease-in-out;
+    visibility: hidden;
 }
-
+.docentes-container > div:nth-child(2n){
+    visibility: hidden;
+    animation: fadeInRight 1s ease-in-out;
+}
+@media (min-width: 768px){
+    .docentes-container > div:nth-child(2n){
+        left: 50px;
+        position: relative;
+    }
+}
+@media (min-width: 992px){
+    .docentes-container > div:nth-child(2n){
+        left: 0;
+        top: 70px;
+        position: relative;
+    }
+}
+@media (min-width: 1200px){
+    .docentes-container > div:nth-child(2n){
+        left: 0;
+        top: 50px;
+        position: relative;
+    }
+}
 .admision{
     position: relative;
     background: #F1F1E6;
@@ -380,3 +512,34 @@ header{
     color: #06fe99;
     border: 2px solid #06fe99;
 }
+
+@keyframes float {
+    0% {
+      transform: skew(0deg, -10deg) translatey(0px);
+    }
+    50% {
+      transform: skew(0deg, -10deg) translatey(-20px);
+    }
+    100% {
+      transform: skew(0deg, -10deg) translatey(0px);
+    }
+  }
+
+  @keyframes inverse-float {
+    0% {
+      bottom: -50px;
+      transform: scale(1);
+    }
+    50% {
+      bottom: -70px;
+      transform: scale(1.2);
+    }
+    100% {
+      bottom: -50px;
+      transform: scale(1);
+    }
+  }
+
+  .modulos-programa > div:nth-child(2n){
+    animation-delay: .5s;
+  }
